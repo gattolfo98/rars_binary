@@ -6,6 +6,8 @@ import rars.riscv.hardware.Register;
 import rars.riscv.hardware.RegisterFile;
 import rars.venus.NumberDisplayBaseChooser;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 
 public class RegistersWindow extends RegisterBlockWindow {
@@ -48,8 +50,21 @@ public class RegistersWindow extends RegisterBlockWindow {
                 /* pc   */  "program counter",
     };
 
+    private void selectionButtonPressed(){
+        NumberDisplayBaseChooser.isBinary = !NumberDisplayBaseChooser.isBinary;
+        updateRegisters();
+
+    }
+    private JButton changeButton;
     public RegistersWindow() {
         super(getRegisters(), regToolTips, "Current 32 bit value");
+        changeButton = new JButton();
+        changeButton.setText("cambia base test");
+        changeButton.setSize(50,50);
+        changeButton.addActionListener(e -> selectionButtonPressed());
+        //TODO: add sium hiihihiah
+        this.add(changeButton, BorderLayout.SOUTH);
+
     }
 
     /*

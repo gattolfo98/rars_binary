@@ -18,6 +18,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -58,6 +60,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 public abstract class RegisterBlockWindow extends JPanel implements Observer {
     private JTable table;
+
     private boolean highlighting;
     private int highlightRow;
     private Register[] registers;
@@ -69,10 +72,16 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
     private Settings settings;
 
 
+
+
     /**
      * Constructor which sets up a fresh window with a table that contains the register values.
      **/
     public RegisterBlockWindow(Register[] registers, String[] registerDescriptions, String valueTip) {
+
+
+
+
         Simulator.getInstance().addObserver(this);
         settings = Globals.getSettings();
         settings.addObserver(this);
@@ -93,6 +102,9 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         table.setPreferredScrollableViewportSize(new Dimension(200, 700));
         this.setLayout(new BorderLayout());  // table display will occupy entire width if widened
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+
+
+
     }
 
     protected abstract String formatRegister(Register value, int base);
@@ -114,8 +126,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
             tableData[i][0] = registers[i].getName();
             int temp = registers[i].getNumber();
             tableData[i][1] = temp == -1 ? "" : temp;
-            tableData[i][2] = formatRegister(registers[i],
-                    NumberDisplayBaseChooser.getBase(settings.getBooleanSetting(Settings.Bool.DISPLAY_VALUES_IN_HEX)));
+            tableData[i][2] = formatRegister(registers[i], NumberDisplayBaseChooser.getBase(settings.getBooleanSetting(Settings.Bool.DISPLAY_VALUES_IN_HEX)));
         }
         return tableData;
     }
@@ -150,9 +161,11 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
      * Update register display using specified display base
      */
     public void updateRegisters() {
+        //TODO: edited by me
+        int baseSium = 2;
         for (int i = 0; i < registers.length; i++) {
-            ((RegTableModel) table.getModel()).setDisplayAndModelValueAt(formatRegister(registers[i],
-                    Globals.getGui().getMainPane().getExecutePane().getValueDisplayBase()), i, 2);
+
+            ((RegTableModel) table.getModel()).setDisplayAndModelValueAt(formatRegister(registers[i], baseSium), i, 2);
         }
     }
 

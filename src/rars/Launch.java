@@ -139,7 +139,7 @@ public class Launch {
         Globals.initialize();
 
         options = new Options();
-        gui = args.length == 0;
+        gui = true;
         simulate = true;
         displayFormat = HEXADECIMAL;
         verbose = true;
@@ -176,7 +176,6 @@ public class Launch {
     }
     /////////////////////////////////////////////////////////////
     // Perform any specified dump operations.  See "dump" option.
-    //
 
     private void dumpSegments(Program program) {
         if (dumpTriples == null || program == null)

@@ -161,12 +161,21 @@ public class NumberDisplayBaseChooser extends JCheckBox {
         //             return Integer.toString(value);
         //          }
     }
-
+    public static boolean isBinary = false;
     public static String formatNumber(long value, int base) {
-        if (base == NumberDisplayBaseChooser.HEXADECIMAL) {
-            return Binary.longToHexString(value);
-        } else {
-            return Long.toString(value);
+        if(!isBinary) {
+                if (base == NumberDisplayBaseChooser.HEXADECIMAL) {
+                    return Binary.longToHexString(value);
+                } else {
+
+                    return Long.toString(value);
+                }
+        }else{
+
+            if(base == NumberDisplayBaseChooser.HEXADECIMAL)
+                return Binary.longToBinaryString(value);
+            else
+                return Binary.hexStringToBinaryString(Long.toString(value));
         }
     }
 

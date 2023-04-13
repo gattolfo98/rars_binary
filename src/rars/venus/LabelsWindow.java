@@ -207,6 +207,7 @@ public class LabelsWindow extends JInternalFrame {
                 table.setSelectionBackground(table.getBackground());
                 // Sense click on label/address and scroll Text/Data segment display to it.
                 table.addMouseListener(new LabelDisplayMouseListener());
+                //TODO: vedere se funziona
                 allSymtabTables.add(table);
             }
         }
